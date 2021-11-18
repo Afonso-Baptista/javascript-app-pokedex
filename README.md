@@ -1,4 +1,4 @@
-# Project description
+## Project description
 This is a small JavaScript web application built with HTML, CSS, and JavaScript, which loads data from an external API to showcase Pokémon data and data points in detail!
 
 ## 👨‍💻 Author
