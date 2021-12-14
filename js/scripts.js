@@ -31,16 +31,16 @@ let pokemonList = [
     }
 ];
 
-/*Explanation: created a function to print the names & heights of pokemon in any array, using a 'for' loop.
+/*Explanation: created a function to print the names & heights of pokemon in any array, using a 'forEach()' loop.
 Added an if-else statement to highlight the largest pokemon in the array.*/
 function printArrayDetails(list) {
-    for (let i = 0; i < list.length; i++) {
-        if (list[i].height >= 1.0) {
-            document.write('<p>' + list[i].name + ' (height: ' + list[i].height + ') - Wow, that\'s big! </p>');
+    list.forEach(function(pokemon) {
+        if (pokemon.height >= 1.0) {
+            document.write('<p>' + pokemon.name + ' (height: ' + pokemon.height + ') - Wow, that\'s big! </p>');
         } else {
-            document.write('<p>' + list[i].name + ' (height: ' + list[i].height + ') </p>');
+            document.write('<p>' + pokemon.name + ' (height: ' + pokemon.height + ') </p>');
         }
-    }
+    });
 }
 
 //Explanation: this calls the printArrayDetails function for the pokemonList array. 
