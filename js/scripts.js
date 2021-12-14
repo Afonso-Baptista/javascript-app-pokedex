@@ -41,7 +41,12 @@ let pokemonRepository = (function() {
 
     //Explanation: created function to, when required, add new pokemon to the pokemonList array.
     function add(newPokemon) {
-        pokemonList.push(newPokemon);
+        //Explanation: if-else statement to check whether new pokemon entered is an object.
+        if (typeof newPokemon === 'object') {
+            pokemonList.push(newPokemon);
+        } else {
+            console.log('Did not add - this must be an object');
+        }
     }
 
     //Explanation: This IIFE will ultimately return the object below, with key-value pairs associated with the functions above.
