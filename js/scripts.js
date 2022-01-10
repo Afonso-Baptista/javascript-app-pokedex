@@ -49,22 +49,30 @@ let pokemonRepository = (function() {
         }
     }
 
+    //Explanation: created function to add, within the pokemon-list ul, list items with buttons holding a Pokemon's name as its inner text.
+    function addListItem(pokemon) {
+        let expandablePokemonList = document.querySelector('.pokemon-list');
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+        button.innerText = pokemon.name;
+        button.classList.add('pokemon-button');
+        listItem.appendChild(button);
+        expandablePokemonList.appendChild(listItem);
+    }
+
     //Explanation: This IIFE will ultimately return the object below, with key-value pairs associated with the functions above.
     return {
         getAll: getAll,
-        add: add
+        add: add,
+        addListItem: addListItem
     };
 })();
 
-/*Explanation: created a function to print the names & heights of pokemon in any array, using a 'forEach()' loop.
-Added an if-else statement to highlight the largest pokemon in the array.*/
+/*Explanation: created a function to print the pokemon in any array, using a 'forEach()' loop.
+Inside the forEach() loop is calling the addListItem function above*/
 function printArrayDetails(list) {
     list.forEach(function(pokemon) {
-        if (pokemon.height >= 1.0) {
-            document.write('<p>' + pokemon.name + ' (height: ' + pokemon.height + ') - Wow, that\'s big! </p>');
-        } else {
-            document.write('<p>' + pokemon.name + ' (height: ' + pokemon.height + ') </p>');
-        }
+        pokemonRepository.addListItem(pokemon);
     });
 }
 

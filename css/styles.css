@@ -1,0 +1,15 @@
+.pokemon-list {
+    /*Explanation: this is done to remove the bullet points from the pokemon list*/
+    list-style-type: none;
+}
+
+.pokemon-button {
+    border: none;
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: #D3D3D3;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
