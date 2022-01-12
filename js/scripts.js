@@ -58,6 +58,15 @@ let pokemonRepository = (function() {
         button.classList.add('pokemon-button');
         listItem.appendChild(button);
         expandablePokemonList.appendChild(listItem);
+        //Explanation: added event listener to all pokemon buttons, to show pokemon details on 'click' event.
+        button.addEventListener('click', function() {
+            showDetails(pokemon);
+        });
+    }
+
+    //Explanation: function to show details of the pokemon on the button 'click' event, called above within addListItem function.
+    function showDetails(pokemon) {
+        console.log(pokemon.name);
     }
 
     //Explanation: This IIFE will ultimately return the object below, with key-value pairs associated with the functions above.
