@@ -39,7 +39,9 @@ let pokemonRepository = (function() {
 
     //Explanation: function to show details of the pokemon on the button 'click' event, called above within addListItem function.
     function showDetails(pokemon) {
-        console.log(pokemon.name);
+        loadDetails(pokemon).then(function () {
+            console.log(pokemon);
+        });
     }
 
     function loadList() {
@@ -58,12 +60,29 @@ let pokemonRepository = (function() {
         })
     }
 
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (details) {
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.weight = details.weight;
+            item.types = details.types;
+            item.abilities = details.abilities;
+        }).catch(function (e) {
+            console.error(e);
+        });
+    }
+
     //Explanation: This IIFE will ultimately return the object below, with key-value pairs associated with the functions above.
     return {
         getAll: getAll,
         add: add,
         addListItem: addListItem,
-        loadList: loadList
+        loadList: loadList,
+        loadDetails: loadDetails,
+        showDetails: showDetails
     };
 })();
 
