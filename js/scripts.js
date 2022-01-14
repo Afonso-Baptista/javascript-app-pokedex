@@ -2,37 +2,10 @@
 /*Explanation: created an Immediately Invoked Function Expression (IIFE) to wrap the previous 'global variables' (e.g. pokemonList) and
 turn them into 'local variables', so they are protected from changes and don't conflict with other variables or external code.*/
 let pokemonRepository = (function() {
-    //Explanation: created an array of pokemon objects to use throughout the web app.
-    let pokemonList = [
-        {
-            name: 'Pikachu', 
-            height: 0.4, 
-            weight: 6, 
-            types: ['electric'], 
-            abilities: ['Static', 'Lightningrod']
-        },
-        {
-            name: 'Charmander', 
-            height: 0.6, 
-            weight: 8.5, 
-            types: ['fire'], 
-            abilities: ['Blaze', 'Solar-power']
-        },
-        {
-            name: 'Squirtle', 
-            height: 0.5, 
-            weight: 9, 
-            types: ['water'], 
-            abilities: ['Rain-dish', 'Torrent']
-        },
-        {
-            name: 'Machamp', 
-            height: 1.6, 
-            weight: 130, 
-            types: ['fighting'], 
-            abilities: ['Guts', 'Steadfast', 'No-guard']
-        }
-    ];
+    //Explanation: created an empty array of pokemon objects to use with the 'PokéAPI'.
+    let pokemonList = [];
+    //Explanation: This is the 'PokéAPI' link with a limit of 150 pokemon.
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     //Explanation: created function to return all items within the pokemonList array, on demand.
     function getAll() {
