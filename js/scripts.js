@@ -42,13 +42,36 @@ let pokemonRepository = (function() {
         console.log(pokemon.name);
     }
 
+    function loadList() {
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            json.results.forEach(function (item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function (e) {
+            console.error(e);
+        })
+    }
+
     //Explanation: This IIFE will ultimately return the object below, with key-value pairs associated with the functions above.
     return {
         getAll: getAll,
         add: add,
-        addListItem: addListItem
+        addListItem: addListItem,
+        loadList: loadList
     };
 })();
+
+pokemonRepository.loadList().then(function() {
+    pokemonRepository.getAll().forEach(function(pokemon) {
+        pokemonRepository.addListItem(pokemon);
+    });
+});
 
 /*Explanation: created a function to print the pokemon in any array, using a 'forEach()' loop.
 Inside the forEach() loop is calling the addListItem function above*/
