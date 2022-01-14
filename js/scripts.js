@@ -4,8 +4,8 @@ turn them into 'local variables', so they are protected from changes and don't c
 let pokemonRepository = (function() {
     //Explanation: created an empty array of pokemon objects to use with the 'PokéAPI'.
     let pokemonList = [];
-    //Explanation: This is the 'PokéAPI' link with a limit of 150 pokemon.
-    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+    //Explanation: This is the 'PokéAPI' link, with all pokemon, 1118 total.
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=1118';
 
     //Explanation: created function to return all items within the pokemonList array, on demand.
     function getAll() {
@@ -44,6 +44,7 @@ let pokemonRepository = (function() {
         });
     }
 
+    //Explanation: function to fetch name & detailsUrl from PokéAPI.
     function loadList() {
         return fetch(apiUrl).then(function (response) {
             return response.json();
@@ -60,11 +61,13 @@ let pokemonRepository = (function() {
         })
     }
 
+    //Explanation: function to fetch details for each pokemon, from PokéAPI.
     function loadDetails(item) {
         let url = item.detailsUrl;
         return fetch(url).then(function (response) {
             return response.json();
         }).then(function (details) {
+            //Explanation: now we add the details (e.g. height, abilities) to the item, to the pokemon
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
             item.weight = details.weight;
@@ -87,19 +90,8 @@ let pokemonRepository = (function() {
 })();
 
 pokemonRepository.loadList().then(function() {
+    //Explanation: now the data is loaded
     pokemonRepository.getAll().forEach(function(pokemon) {
         pokemonRepository.addListItem(pokemon);
     });
 });
-
-/*Explanation: created a function to print the pokemon in any array, using a 'forEach()' loop.
-Inside the forEach() loop is calling the addListItem function above*/
-function printArrayDetails(list) {
-    list.forEach(function(pokemon) {
-        pokemonRepository.addListItem(pokemon);
-    });
-}
-
-/*Explanation: this calls the printArrayDetails function for the pokemonList array, which is inside the pokemonRepository 
-IIFE and thus needs to be called as below.*/
-printArrayDetails(pokemonRepository.getAll());
