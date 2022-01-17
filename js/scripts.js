@@ -2,6 +2,7 @@
 /*Explanation: created an Immediately Invoked Function Expression (IIFE) to wrap the previous 'global variables' (e.g. pokemonList) and
 turn them into 'local variables', so they are protected from changes and don't conflict with other variables or external code.*/
 let pokemonRepository = (function() {
+    let modalContainer = document.querySelector('#modal-container');
     //Explanation: created an empty array of pokemon objects to use with the 'PokéAPI'.
     let pokemonList = [];
     //Explanation: This is the 'PokéAPI' link, with all pokemon, 1118 total.
@@ -37,10 +38,11 @@ let pokemonRepository = (function() {
         });
     }
 
+    //ERROR: pokemon.types & pokemon.abilities both show "[object Object],[object Object]" in modal
     //Explanation: function to show details of the pokemon on the button 'click' event, called above within addListItem function.
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
-            console.log(pokemon);
+            showModal(pokemon.name, pokemon.height, pokemon.weight, pokemon.types, pokemon.abilities, pokemon.imageUrl);
         });
     }
 
@@ -77,6 +79,67 @@ let pokemonRepository = (function() {
             console.error(e);
         });
     }
+    
+    function showModal(title, height, weight, types, abilities, image) {
+        //Explanation: To clear all existing modal content
+        modalContainer.innerHTML = '';
+
+        let modal = document.createElement('div');
+        modal.classList.add('modal');
+
+        //Explanation: Add the new modal content
+        let closeButtonElement = document.createElement('button');
+        closeButtonElement.classList.add('modal-close');
+        closeButtonElement.innerText = 'X';
+        closeButtonElement.addEventListener('click', hideModal);
+
+        let titleElement = document.createElement('h1');
+        titleElement.innerText = title;
+
+        let heightElement = document.createElement('p');
+        heightElement.innerText = "Height: " + height;
+
+        let weightElement = document.createElement('p');
+        weightElement.innerText = "Weight: " + weight;
+
+        let typesElement = document.createElement('p');
+        typesElement.innerText = "Type: " + types;
+
+        let abilitiesElement = document.createElement('p');
+        abilitiesElement.innerText = "Abilities: " + abilities;
+
+        //ERROR: doesn't show image in modal
+        let imageElement = document.createElement('img');
+        imageElement.innerHTML = image;
+
+        modal.appendChild(closeButtonElement);
+        modal.appendChild(titleElement);
+        modal.appendChild(heightElement);
+        modal.appendChild(weightElement);
+        modal.appendChild(typesElement);
+        modal.appendChild(abilitiesElement);
+        modal.appendChild(imageElement);
+        modalContainer.appendChild(modal);
+
+        modalContainer.classList.add('is-visible');
+    }
+
+    function hideModal() {
+        modalContainer.classList.remove('is-visible');
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+          hideModal();  
+        }
+    });
+
+    modalContainer.addEventListener('click', (e) => {
+        let target = e.target;
+        if (target === modalContainer) {
+          hideModal();
+        }
+    });
 
     //Explanation: This IIFE will ultimately return the object below, with key-value pairs associated with the functions above.
     return {
