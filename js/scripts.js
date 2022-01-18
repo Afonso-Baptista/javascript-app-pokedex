@@ -113,10 +113,12 @@ let pokemonRepository = (function() {
         weightElement.innerText = "Weight: " + pokemon.weight;
 
         let typesElement = document.createElement('p');
-        typesElement.innerText = "Type: " + pokemon.types;
+        let pokeTypes = pokemon.types;
+        typesElement.innerText = "Type: " + pokeTypes.join(', ');
 
         let abilitiesElement = document.createElement('p');
-        abilitiesElement.innerText = "Abilities: " + pokemon.abilities;
+        let pokeAbilities = pokemon.abilities;
+        abilitiesElement.innerText = "Abilities: " + pokeAbilities.join(', ');
 
         let imageElement = document.createElement('img');
         imageElement.setAttribute("src", pokemon.imageUrl);
