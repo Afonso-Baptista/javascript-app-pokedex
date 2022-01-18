@@ -28,7 +28,8 @@ let pokemonRepository = (function() {
         let expandablePokemonList = document.querySelector('.pokemon-list');
         let listItem = document.createElement('li');
         let button = document.createElement('button');
-        button.innerText = pokemon.name;
+        //Explanation: the code below also serves to capitalize the pokemon's name
+        button.innerText = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
         button.classList.add('pokemon-button');
         listItem.appendChild(button);
         expandablePokemonList.appendChild(listItem);
@@ -75,11 +76,13 @@ let pokemonRepository = (function() {
             //Explanation: added for loops for types and abilities, to iterate over multiple items
             item.types = [];
             for (let i = 0; i < details.types.length; i++) {
-                item.types.push(details.types[i].type.name);
+                let typesDetails = details.types[i].type.name;
+                item.types.push(typesDetails[0].toUpperCase() + typesDetails.substring(1));
             }
             item.abilities = [];
             for (let i = 0; i < details.abilities.length; i++) {
-                item.abilities.push(details.abilities[i].ability.name);
+                let abilitiesDetails = details.abilities[i].ability.name;
+                item.abilities.push(abilitiesDetails[0].toUpperCase() + abilitiesDetails.substring(1));
             }
         }).catch(function (e) {
             console.error(e);
@@ -101,7 +104,7 @@ let pokemonRepository = (function() {
         closeButtonElement.addEventListener('click', hideModal);
 
         let titleElement = document.createElement('h1');
-        titleElement.innerText = pokemon.name;
+        titleElement.innerText = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
 
         let heightElement = document.createElement('p');
         heightElement.innerText = "Height: " + pokemon.height;
