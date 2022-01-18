@@ -38,7 +38,6 @@ let pokemonRepository = (function() {
         });
     }
 
-    //ERROR: pokemon.types & pokemon.abilities both show "[object Object],[object Object]" in modal
     //Explanation: function to show details of the pokemon on the button 'click' event, called above within addListItem function.
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
@@ -73,13 +72,20 @@ let pokemonRepository = (function() {
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
             item.weight = details.weight;
-            item.types = details.types;
-            item.abilities = details.abilities;
+            //Explanation: added for loops for types and abilities, to iterate over multiple items
+            item.types = [];
+            for (let i = 0; i < details.types.length; i++) {
+                item.types.push(details.types[i].type.name);
+            }
+            item.abilities = [];
+            for (let i = 0; i < details.abilities.length; i++) {
+                item.abilities.push(details.abilities[i].ability.name);
+            }
         }).catch(function (e) {
             console.error(e);
         });
     }
-    
+
     function showModal(title, height, weight, types, abilities, image) {
         //Explanation: To clear all existing modal content
         modalContainer.innerHTML = '';
