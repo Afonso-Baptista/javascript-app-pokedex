@@ -2,7 +2,9 @@
 /*Explanation: created an Immediately Invoked Function Expression (IIFE) to wrap the previous 'global variables' (e.g. pokemonList) and
 turn them into 'local variables', so they are protected from changes and don't conflict with other variables or external code.*/
 let pokemonRepository = (function() {
-    let modalContainer = document.querySelector('#modal-container');
+    
+    let modalContainer = document.querySelector('#pokemonModal');
+
     //Explanation: created an empty array of pokemon objects to use with the 'PokéAPI'.
     let pokemonList = [];
     //Explanation: This is the 'PokéAPI' link, with all pokemon, 1118 total.
@@ -27,6 +29,20 @@ let pokemonRepository = (function() {
     function addListItem(pokemon) {
         let expandablePokemonList = document.querySelector('.pokemon-list');
         let listItem = document.createElement('li');
+        let openModalButton = document.createElement('button');
+        /*
+        let openModalButton = $('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pokemonModal"></button>')
+        */
+        openModalButton.innerText = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
+
+        listItem.appendChild(openModalButton);
+        expandablePokemonList.appendChild(listItem);
+
+        openModalButton.addEventListener('click', function() {
+            showDetails(pokemon, modalContainer);
+        });
+
+        /*DELETE?
         let button = document.createElement('button');
         //Explanation: the code below also serves to capitalize the pokemon's name
         button.innerText = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
@@ -37,6 +53,7 @@ let pokemonRepository = (function() {
         button.addEventListener('click', function() {
             showDetails(pokemon);
         });
+        */
     }
 
     //Explanation: function to show details of the pokemon on the button 'click' event, called above within addListItem function.
@@ -91,6 +108,16 @@ let pokemonRepository = (function() {
 
     //Explanation: function to show a Modal with details about a pokemon.
     function showModal(pokemon) {
+        //Explanation: To select the modal elements in the HTML file
+        let modalHeader = $('.modal-header');
+        let modalTitle = $('.modal-title');
+        let modalBody = $('.modal-body');
+
+        //Explanation: To empty the modal each time a new modal is opened
+        modalTitle.empty();
+        modalBody.empty();
+        
+        /*DELETE?
         //Explanation: To clear all existing modal content
         modalContainer.innerHTML = '';
 
@@ -102,27 +129,57 @@ let pokemonRepository = (function() {
         closeButtonElement.classList.add('modal-close');
         closeButtonElement.innerText = 'X';
         closeButtonElement.addEventListener('click', hideModal);
+        */
 
+        let titleElement = $('<h1>' + pokemon.name[0].toUpperCase() + pokemon.name.substring(1) + '</h1>');
+        /*DELETE?
         let titleElement = document.createElement('h1');
         titleElement.innerText = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
+        */
 
+        let heightElement = $('<p>' + 'Height: ' + pokemon.height + '</p>');
+        /*DELETE?
         let heightElement = document.createElement('p');
         heightElement.innerText = "Height: " + pokemon.height;
+        */
 
+        let weightElement = $('<p>' + 'Weight: ' + pokemon.weight + '</p>');
+        /*DELETE?
         let weightElement = document.createElement('p');
         weightElement.innerText = "Weight: " + pokemon.weight;
+        */
 
+        let pokeTypes = pokemon.types;
+        let typesElement = $('<p>' + 'Type: ' + pokeTypes.join(', ') + '</p>');
+        /*DELETE?
         let typesElement = document.createElement('p');
         let pokeTypes = pokemon.types;
         typesElement.innerText = "Type: " + pokeTypes.join(', ');
+        */
 
+        let pokeAbilities = pokemon.abilities;
+        let abilitiesElement = $('<p>' + 'Abilities: ' + pokeAbilities.join(', ') + '</p>');
+        /*DELETE?
         let abilitiesElement = document.createElement('p');
         let pokeAbilities = pokemon.abilities;
         abilitiesElement.innerText = "Abilities: " + pokeAbilities.join(', ');
+        */
 
+        let imageElement = $('<img class="modal-img" style="width:50%">');
+        imageElement.attr("src", pokemon.imageUrl);
+        /*DELETE?
         let imageElement = document.createElement('img');
         imageElement.setAttribute("src", pokemon.imageUrl);
+        */
 
+        modalTitle.append(titleElement);
+        modalBody.append(heightElement);
+        modalBody.append(weightElement);
+        modalBody.append(typesElement);
+        modalBody.append(abilitiesElement);
+        modalBody.append(imageElement);
+
+        /*DELETE?
         modal.appendChild(closeButtonElement);
         modal.appendChild(titleElement);
         modal.appendChild(heightElement);
@@ -133,9 +190,11 @@ let pokemonRepository = (function() {
         modalContainer.appendChild(modal);
 
         modalContainer.classList.add('is-visible');
+        */
     }
-
+    
     //Explanation: function to hide the Modal above.
+    /*DELETE?
     function hideModal() {
         modalContainer.classList.remove('is-visible');
     }
@@ -154,6 +213,7 @@ let pokemonRepository = (function() {
           hideModal();
         }
     });
+    */
 
     //Explanation: This IIFE will ultimately return the object below, with key-value pairs associated with the functions above.
     return {
