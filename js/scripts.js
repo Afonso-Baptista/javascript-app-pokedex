@@ -35,6 +35,8 @@ let pokemonRepository = (function() {
         */
         openModalButton.innerText = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
 
+        openModalButton.classList.add('search-button');
+
         listItem.appendChild(openModalButton);
         expandablePokemonList.appendChild(listItem);
 
@@ -214,6 +216,15 @@ let pokemonRepository = (function() {
         }
     });
     */
+
+    $(document).ready(function(){
+        $('#search-pokemon').on('keyup', function() {
+            let value = $(this).val().toLowerCase();
+            $(".search-button").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
 
     //Explanation: This IIFE will ultimately return the object below, with key-value pairs associated with the functions above.
     return {
