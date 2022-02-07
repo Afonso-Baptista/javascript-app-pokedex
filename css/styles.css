@@ -1,5 +1,11 @@
+body {
+    background-image: url("https://i.postimg.cc/L6nL48HB/all-pokemon.jpg");
+    background-repeat: repeat;
+}
+
 .list-container {
     margin: 50px 20px 5px;
+    background-image: url();
 }
 
 .pokemon-list {
