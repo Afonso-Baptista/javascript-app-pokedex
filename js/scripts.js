@@ -36,12 +36,15 @@ let pokemonRepository = (function() {
         openModalButton.innerText = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
 
         openModalButton.classList.add('search-button');
+        openModalButton.classList.add("button-class", "btn", "btn-primary", "btn-lg");
+        openModalButton.setAttribute('data-target', '#pokemonModal');
+        openModalButton.setAttribute('data-toggle', 'modal');
 
         listItem.appendChild(openModalButton);
         expandablePokemonList.appendChild(listItem);
 
         openModalButton.addEventListener('click', function() {
-            showDetails(pokemon, modalContainer);
+            showDetails(pokemon);
         });
 
         /*DELETE?
@@ -180,7 +183,8 @@ let pokemonRepository = (function() {
         modalBody.append(typesElement);
         modalBody.append(abilitiesElement);
         modalBody.append(imageElement);
-
+        
+        
         /*DELETE?
         modal.appendChild(closeButtonElement);
         modal.appendChild(titleElement);
@@ -217,6 +221,7 @@ let pokemonRepository = (function() {
     });
     */
 
+    //Explanation: pokemon search function, used in navbar
     $(document).ready(function(){
         $('#search-pokemon').on('keyup', function() {
             let value = $(this).val().toLowerCase();
