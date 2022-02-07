@@ -3,8 +3,6 @@
 turn them into 'local variables', so they are protected from changes and don't conflict with other variables or external code.*/
 let pokemonRepository = (function() {
     
-    let modalContainer = document.querySelector('#pokemonModal');
-
     //Explanation: created an empty array of pokemon objects to use with the 'PokéAPI'.
     let pokemonList = [];
     //Explanation: This is the 'PokéAPI' link, with all pokemon, 1118 total.
@@ -30,10 +28,9 @@ let pokemonRepository = (function() {
         let expandablePokemonList = document.querySelector('.pokemon-list');
         let listItem = document.createElement('li');
         listItem.classList.add('listItem-style');
+
         let openModalButton = document.createElement('button');
-        /*
-        let openModalButton = $('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pokemonModal"></button>')
-        */
+        //Explanation: the code below also serves to capitalize the pokemon's name
         openModalButton.innerText = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
 
         openModalButton.classList.add('search-button');
@@ -44,22 +41,10 @@ let pokemonRepository = (function() {
         listItem.appendChild(openModalButton);
         expandablePokemonList.appendChild(listItem);
 
+        //Explanation: added event listener to all pokemon buttons, to show pokemon details on 'click' event.
         openModalButton.addEventListener('click', function() {
             showDetails(pokemon);
         });
-
-        /*DELETE?
-        let button = document.createElement('button');
-        //Explanation: the code below also serves to capitalize the pokemon's name
-        button.innerText = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
-        button.classList.add('pokemon-button');
-        listItem.appendChild(button);
-        expandablePokemonList.appendChild(listItem);
-        //Explanation: added event listener to all pokemon buttons, to show pokemon details on 'click' event.
-        button.addEventListener('click', function() {
-            showDetails(pokemon);
-        });
-        */
     }
 
     //Explanation: function to show details of the pokemon on the button 'click' event, called above within addListItem function.
@@ -122,61 +107,21 @@ let pokemonRepository = (function() {
         //Explanation: To empty the modal each time a new modal is opened
         modalTitle.empty();
         modalBody.empty();
-        
-        /*DELETE?
-        //Explanation: To clear all existing modal content
-        modalContainer.innerHTML = '';
-
-        let modal = document.createElement('div');
-        modal.classList.add('modal');
-
-        //Explanation: Add the new modal content
-        let closeButtonElement = document.createElement('button');
-        closeButtonElement.classList.add('modal-close');
-        closeButtonElement.innerText = 'X';
-        closeButtonElement.addEventListener('click', hideModal);
-        */
 
         let titleElement = $('<h1>' + pokemon.name[0].toUpperCase() + pokemon.name.substring(1) + '</h1>');
-        /*DELETE?
-        let titleElement = document.createElement('h1');
-        titleElement.innerText = pokemon.name[0].toUpperCase() + pokemon.name.substring(1);
-        */
 
         let heightElement = $('<p>' + 'Height: ' + pokemon.height + '</p>');
-        /*DELETE?
-        let heightElement = document.createElement('p');
-        heightElement.innerText = "Height: " + pokemon.height;
-        */
 
         let weightElement = $('<p>' + 'Weight: ' + pokemon.weight + '</p>');
-        /*DELETE?
-        let weightElement = document.createElement('p');
-        weightElement.innerText = "Weight: " + pokemon.weight;
-        */
 
         let pokeTypes = pokemon.types;
         let typesElement = $('<p>' + 'Type: ' + pokeTypes.join(', ') + '</p>');
-        /*DELETE?
-        let typesElement = document.createElement('p');
-        let pokeTypes = pokemon.types;
-        typesElement.innerText = "Type: " + pokeTypes.join(', ');
-        */
 
         let pokeAbilities = pokemon.abilities;
         let abilitiesElement = $('<p>' + 'Abilities: ' + pokeAbilities.join(', ') + '</p>');
-        /*DELETE?
-        let abilitiesElement = document.createElement('p');
-        let pokeAbilities = pokemon.abilities;
-        abilitiesElement.innerText = "Abilities: " + pokeAbilities.join(', ');
-        */
 
         let imageElement = $('<img class="modal-img" style="width:50%">');
         imageElement.attr("src", pokemon.imageUrl);
-        /*DELETE?
-        let imageElement = document.createElement('img');
-        imageElement.setAttribute("src", pokemon.imageUrl);
-        */
 
         modalTitle.append(titleElement);
         modalBody.append(heightElement);
@@ -184,43 +129,7 @@ let pokemonRepository = (function() {
         modalBody.append(typesElement);
         modalBody.append(abilitiesElement);
         modalBody.append(imageElement);
-        
-        
-        /*DELETE?
-        modal.appendChild(closeButtonElement);
-        modal.appendChild(titleElement);
-        modal.appendChild(heightElement);
-        modal.appendChild(weightElement);
-        modal.appendChild(typesElement);
-        modal.appendChild(abilitiesElement);
-        modal.appendChild(imageElement);
-        modalContainer.appendChild(modal);
-
-        modalContainer.classList.add('is-visible');
-        */
     }
-    
-    //Explanation: function to hide the Modal above.
-    /*DELETE?
-    function hideModal() {
-        modalContainer.classList.remove('is-visible');
-    }
-
-    //Explanation: to hide the modal when a user presses the 'Escape' key.
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-          hideModal();  
-        }
-    });
-
-    //Explanation: to hide the modal when a user presses outside the modal, on the modal container.
-    modalContainer.addEventListener('click', (e) => {
-        let target = e.target;
-        if (target === modalContainer) {
-          hideModal();
-        }
-    });
-    */
 
     //Explanation: pokemon search function, used in navbar
     $(document).ready(function(){

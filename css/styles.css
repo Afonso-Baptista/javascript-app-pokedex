@@ -1,4 +1,5 @@
 body {
+    font-family: 'Signika', sans-serif;
     background-image: url("https://i.postimg.cc/L6nL48HB/all-pokemon.jpg");
     background-repeat: repeat;
 }
@@ -17,6 +18,26 @@ body {
 
 .listItem-style {
     margin-bottom: 30px;
+}
+
+.btn-lg {
+    padding: 25px 25px;
+    border-radius: 10px;
+}
+
+.modal {
+    color: #3c5aa6;
+}
+
+.modal-header {
+    border: none;
+}
+
+.modal-body {
+    margin: 5px 25px 40px;
+    text-align: center;
+    border: 2px solid;
+    border-radius: 2%;
 }
 
 

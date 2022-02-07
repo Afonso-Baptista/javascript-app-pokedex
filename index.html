@@ -6,6 +6,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Simple JS App</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
     </head>
@@ -17,18 +20,13 @@
                 <img src="img/pokedex-logo.png" width="50%" height="50%" alt="Pokédex logo">
             </a>
             <form class="form-inline">
-                <input class="form-control mr-sm-2" id="search-pokemon" type="search" placeholder="Search 1,118 Pokemon" aria-label="Search for Pokemon">
+                <input class="form-control mr-sm-2" id="search-pokemon" type="search" placeholder="Search all 898 Pokémon" aria-label="Search for Pokemon">
             </form>
         </nav>
 
         <div class="list-container">
             <ul class="pokemon-list list-unstyled"></ul>
         </div>
-
-
-        <!--DELETE?
-        <div id="modal-container"></div>
-        -->
 
         <!-- Modal -->
         <div class="modal fade" id="pokemonModal" tabindex="-1" role="dialog" aria-labelledby="pokemonModalLabel" aria-hidden="true">
