@@ -29,6 +29,7 @@ let pokemonRepository = (function() {
     function addListItem(pokemon) {
         let expandablePokemonList = document.querySelector('.pokemon-list');
         let listItem = document.createElement('li');
+        listItem.classList.add('listItem-style');
         let openModalButton = document.createElement('button');
         /*
         let openModalButton = $('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pokemonModal"></button>')

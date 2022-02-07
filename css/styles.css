@@ -1,3 +1,18 @@
+.list-container {
+    margin: 50px 20px 5px;
+}
+
+.pokemon-list {
+    -webkit-column-count: 5;
+    -moz-column-count: 5;
+    column-count: 5;
+    text-align: center;
+}
+
+.listItem-style {
+    margin-bottom: 30px;
+}
+
 
 /*Explanation: to clear the 'X' in the Pokemon search bar, from Internet Explorer*/
 input[type=search]::-ms-clear {
