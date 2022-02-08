@@ -16,6 +16,46 @@ body {
     text-align: center;
 }
 
+/*Explanation: The media queries below serve to reduce the number of columns displayed as screen sizes decrease*/
+@media all and (max-width: 1200px) {
+    .pokemon-list {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+    }
+}
+
+@media all and (max-width: 800px) {
+    .pokemon-list {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+    }
+}
+
+@media all and (max-width: 650px) {
+    .pokemon-list {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media all and (max-width: 400px) {
+    .pokemon-list {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+    }
+}
+
+/*Explanation: at around 627px, the search box in the navbar goes below the logo, eating up the top margin, thus this media query*/
+@media all and (max-width: 627px) {
+    .list-container {
+        margin-top: 170px;
+    }
+}
+
 .listItem-style {
     margin-bottom: 30px;
 }
